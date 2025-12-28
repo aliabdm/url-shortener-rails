@@ -1,0 +1,25 @@
+<%= form_with(model: link) do |form| %>
+  <% if link.errors.any? %>
+    <div style="color: red; background: #fee; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+      <h2><%= pluralize(link.errors.count, "error") %> prohibited this link from being saved:</h2>
+      <ul>
+        <% link.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="margin-bottom: 20px;">
+    <%= form.label :original_url, "Enter your long URL:", style: "display: block; font-weight: bold; margin-bottom: 8px; color: #374151;" %>
+    <%= form.text_field :original_url, 
+        placeholder: "https://example.com/very/long/url", 
+        style: "width: 100%; padding: 12px; font-size: 16px; border: 2px solid #d1d5db; border-radius: 8px; box-sizing: border-box;",
+        required: true %>
+  </div>
+
+  <div>
+    <%= form.submit "✂️ Shorten URL", 
+        style: "background: #2563eb; color: white; padding: 12px 32px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer;" %>
+  </div>
+<% end %>

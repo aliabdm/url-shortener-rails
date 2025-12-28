@@ -1,0 +1,58 @@
+<div style="max-width: 900px; margin: 50px auto; font-family: Arial; padding: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <div>
+      <h1 style="color: #2563eb; font-size: 36px; margin: 0;">✂️ URL Shortener</h1>
+      <p style="color: #6b7280; margin: 5px 0 0 0;">Create short, shareable links in seconds</p>
+    </div>
+    <%= link_to "➕ New Short Link", new_link_path, 
+                style: "background: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;" %>
+  </div>
+
+  <% if @links.any? %>
+    <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="background: #f9fafb; border-bottom: 2px solid #e5e7eb;">
+            <th style="padding: 15px; text-align: left; color: #374151; font-weight: bold;">Short Code</th>
+            <th style="padding: 15px; text-align: left; color: #374151; font-weight: bold;">Original URL</th>
+            <th style="padding: 15px; text-align: center; color: #374151; font-weight: bold;">Clicks</th>
+            <th style="padding: 15px; text-align: center; color: #374151; font-weight: bold;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @links.each do |link| %>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+              <td style="padding: 15px;">
+                <code style="background: #fef3c7; padding: 6px 10px; border-radius: 4px; font-family: monospace; color: #92400e; font-weight: bold;">
+                  <%= link.short_code %>
+                </code>
+              </td>
+              <td style="padding: 15px; max-width: 350px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #6b7280;">
+                <%= link.original_url %>
+              </td>
+              <td style="padding: 15px; text-align: center;">
+                <% if link.clicks > 0 %>
+                  <strong style="color: #10b981; font-size: 18px;"><%= link.clicks %></strong>
+                <% else %>
+                  <span style="color: #9ca3af;">0</span>
+                <% end %>
+              </td>
+              <td style="padding: 15px; text-align: center;">
+                <%= link_to "View", link, style: "color: #2563eb; text-decoration: none; margin: 0 8px; font-weight: 500;" %>
+                <%= link_to "Delete", link, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
+                            style: "color: #ef4444; text-decoration: none; margin: 0 8px; font-weight: 500;" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div style="text-align: center; padding: 60px 20px; background: #f9fafb; border-radius: 8px; border: 2px dashed #d1d5db;">
+      <p style="font-size: 48px; margin: 0;">📭</p>
+      <p style="color: #6b7280; font-size: 18px; margin: 15px 0;">No links yet</p>
+      <%= link_to "Create your first link", new_link_path, 
+                  style: "color: #2563eb; text-decoration: none; font-weight: bold;" %>
+    </div>
+  <% end %>
+</div>

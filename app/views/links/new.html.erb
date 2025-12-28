@@ -1,0 +1,10 @@
+<div style="max-width: 600px; margin: 50px auto; padding: 30px; font-family: Arial; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  <h1 style="color: #1e40af; font-size: 32px; margin-bottom: 10px;">✂️ Create Short Link</h1>
+  <p style="color: #6b7280; margin-bottom: 30px;">Transform your long URL into a short, shareable link</p>
+
+  <%= render "form", link: @link %>
+
+  <div style="margin-top: 20px;">
+    <%= link_to "← Back to all links", links_path, style: "color: #2563eb; text-decoration: none;" %>
+  </div>
+</div>
