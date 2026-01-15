@@ -1,21 +1,26 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   prepared_statements: false
+
+development:
+  <<: *default
+  database: url_shortener_development
   username: postgres
   password: Ffwjgv8e
   host: localhost
   port: 5432
 
-development:
-  <<: *default
-  database: url_shortener_development
-
 test:
   <<: *default
   database: url_shortener_test
+  username: postgres
+  password: Ffwjgv8e
+  host: localhost
+  port: 5432
 
 production:
-  adapter: postgresql
+  <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+  prepared_statements: false
